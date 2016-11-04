@@ -1,4 +1,4 @@
-
+//Rodrigo modifico esto para prueba.
 class Hora
 {
 private:
