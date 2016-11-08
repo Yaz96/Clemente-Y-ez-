@@ -1,3 +1,4 @@
+//Calse abstracta.
 class Servicio
 {
 public:
@@ -5,17 +6,17 @@ public:
 	Servicio();
 	Servicio(String cl, int tM, char t);
 	//Gets
-	string getClave();//Clave
-	int getTiempoMax();//Tiempo MMaximo
-	char getTipo();//Tipo
+	virtual string getClave() = 0;//Clave
+	virtual int getTiempoMax() = 0;//Tiempo MMaximo
+	virtual char getTipo() = 0;//Tipo
 	//Sets
-	void setClave(string cl);//Clave
-	void setTiempoMax();//Tiempo Maximo
-	void setTipo();//Tipo
+	virtual void setClave(string cl) = 0;//Clave
+	virtual void setTiempoMax() = 0;//Tiempo Maximo
+	virtual void setTipo() = 0;//Tipo
 	//Print
-	virtual void muestra();
+	virtual void muestra() = 0;
 	//Calculo
-	virtual double calculaCosto(int in, int tM); //Calcula el costo
+	virtual double calculaCosto(int in, int tM) = 0; //Calcula el costo
 protected:
 	string clave;
 	int tiempoMax;
@@ -33,41 +34,4 @@ Servicio::Servicio(string cl, int tM, char t)
 	clave = cl;
 	tiempoMax = tM;
 	tipo = t;
-}
-//-----------------------------------------------------------------------------------Gets----------------------------------------------------------------------------
-string Servicio::getClave()
-{
-	return Clave;
-}	
-int Servicio::getTiempoMax()
-{
-	return tiempoMax;
-}
-char Servicio::getTipo()
-{
-	return tipo;
-}
-//------------------------------------------------------------------------------------Sets-------------------------------------------------------------------------------
-void Servicio::setClave(string cl)
-{
-	clave = cl;
-}
-void Servicio::setTiempoMax(int tM)
-{
-	tiempoMax = tM;
-}
-void Servicio::setTipo(char t)
-{
-	tipo = t;
-}
-//--------------------------------------------------------------------------------------Print------------------------------------------------------------------------
-void Servicio::muestra()
-{
-	cout << "Clave: " << clave << '\n' << "Tiempo Maximo: " << tiempoMax << '\n'
-	<< "Tipo: " << tipo << endl;
-}
-//---------------------------------------------------------------------------------Calcula-costo--------------------------------------------------------------------
-double calculaCosto(int tM)
-{	
-	//Preguntar al profe.
 }
