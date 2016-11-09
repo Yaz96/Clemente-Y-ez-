@@ -76,8 +76,7 @@ cout<<"Clave: "<<clave<<'\n'<< "Tiempo Maximo: " << tiempoMax << '\n'
 }
 
 double Aparato::calculaCosto (int tiem){
-double Precio=costoX15min*(tiem/15);
+    int sesiones= ceil(tiem/15);
+double Precio=sesiones*costoX15min;
 return Precio;
 }
-
-
