@@ -1,5 +1,4 @@
-//Le agregue la sobrecarga  del operador + ya nomas falta de terminar los operadores >= y <=
-
+// falta de terminar los operadores >= y <=
 class Hora
 {
 public:

@@ -15,7 +15,7 @@ public:
 	void setDeporte(string d);//Deporte
 	//print 
 	void muestra();
-	void calculaCosto(); //Calcular costo
+	double calculaCosto(); //Calcular costo
 private:
 	double costoXHr;
 	int cantMaxPers;
@@ -63,14 +63,18 @@ void Cancha::setDeporte(string d)
 //--------------------------------------------Print---------------------------------------------------------
 void Cancha::muestra()
 {
-	cout << "Clave: " << clave << '\n' << "Tiempo Maximo: " << tiempoMax << '\n'
+	cout << "Tipo de Reservacion: Cancha" << '\n' << "Clave: " << clave << '\n' << "Tiempo Maximo: " << tiempoMax << '\n'
 	<< "Tipo: " << tipo << '\n' << "Costo por Hora: " << costoXHr << '\n' << "Cantidad Maxima de Personas: " << cantMaxPers 
 	<< '\n' << "Deporte: " << deporte << endl;
 }
 //----------------------------------------Calcula-costo-----------------------------------------------------
-void Cancha::calculaCosto()
+double Cancha::calculaCosto(int Tm)//Por hora.
 {
-	//Preguntar al profe. calculaCosto que	recibe	como	parámetro	el	tiempo en	minutos que	se	quiere	rentar
-//y	regresa	como	valor	de	retorno	el	costo	de	rentar	ese	servicio.	Este	método	debe	
-//ser	abstracto.
+	int iCN;
+	iCN = Tm / 60;
+
+	if ((Tm % 6) != 0) //Si sobran minutos, se combra una hora mas.
+		iCN ++;
+
+	return costoXHr * iCN;
 }

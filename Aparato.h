@@ -15,7 +15,7 @@ string getDescripcion();
 
 //Metodos de modificacion
 void setcostoX15min(double Cost);
-void setConInstructor()bool Cond;
+void setConInstructor(bool Cond);
 void setDescripcion(string Desc);
 
 // Metodos Abstractos 
@@ -69,7 +69,7 @@ descricpion=Desc;
 //----------------------------------------------------Metodos Abstractos----
 
 void Aparato::muestra(){
-cout<<"Clave: "<<clave<<'\n'<< "Tiempo Maximo: " << tiempoMax << '\n'
+cout<<"Tipo de Reservacion: Aparato"<<'\n'<<"Clave: "<<clave<<'\n'<< "Tiempo Maximo: " << tiempoMax << '\n'
 	<< "Tipo: " << tipo << '\n' << "Costo por Hora: " << costoX15min<< '\n'<<"Instructor: "<<conInstructor
     <<'\n'<<"Descripcion: "<<descricpion<<endl;
 

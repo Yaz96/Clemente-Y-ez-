@@ -1,4 +1,3 @@
-//Calse abstracta.
 class Servicio
 {
 public:
@@ -6,13 +5,13 @@ public:
 	Servicio();
 	Servicio(String cl, int tM, char t);
 	//Gets
-	virtual string getClave() = 0;//Clave
-	virtual int getTiempoMax() = 0;//Tiempo MMaximo
-	virtual char getTipo() = 0;//Tipo
+	string getClave();//Clave
+	int getTiempoMax();//Tiempo MMaximo
+	char getTipo();//Tipo
 	//Sets
-	virtual void setClave(string cl) = 0;//Clave
-	virtual void setTiempoMax() = 0;//Tiempo Maximo
-	virtual void setTipo() = 0;//Tipo
+	void setClave(string cl);//Clave
+	void setTiempoMax();//Tiempo Maximo
+	void setTipo();//Tipo
 	//Print
 	virtual void muestra() = 0;
 	//Calculo
@@ -33,5 +32,31 @@ Servicio::Servicio(string cl, int tM, char t)
 {
 	clave = cl;
 	tiempoMax = tM;
+	tipo = t;
+}
+//-----------------------------------------------------------------------------------Gets----------------------------------------------------------------------------
+string Servicio::getClave()
+{
+	return Clave;
+}	
+int Servicio::getTiempoMax()
+{
+	return tiempoMax;
+}
+char Servicio::getTipo()
+{
+	return tipo;
+}
+//------------------------------------------------------------------------------------Sets-------------------------------------------------------------------------------
+void Servicio::setClave(string cl)
+{
+	clave = cl;
+}
+void Servicio::setTiempoMax(int tM)
+{
+	tiempoMax = tM;
+}
+void Servicio::setTipo(char t)
+{
 	tipo = t;
 }
