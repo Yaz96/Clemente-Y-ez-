@@ -13,12 +13,12 @@ public:
     //Print
     void print();
     //Sobrecargas
-    Reloj operator+(int m);//Sumarle minutos a una hora.
+    Hora operator+(int m);//Sumarle minutos a una hora.
     bool operator==(Hora h2);//Comaparar dos horas.
     bool operator>=(Hora h2);//Mayor igual que, entre horas.
     bool operator<=(Hora h2);//Menor igual que, entre horas.
-    friend istream& operator>>(istream &r, Hora &h2);//Mayor Mayor, de horas.
-    friend ostream& operator<<(ostream &r, Hora &h2);//Menor menor, de horas.
+    friend istream& operator>>(istream &is, Hora &h2);//Mayor Mayor, de horas.
+    friend ostream& operator<<(ostream &os, Hora &h2);//Menor menor, de horas.
 
 private:
     int hh, mm;
@@ -61,9 +61,9 @@ void Hora::print(){
 Hora Hora::operator+(int m)//Suma con minutos del usuario. (+)
 {
     int iRelojAy1, iHrAy1, iMnAy1, iCont = 0;
-    Reloj rRelojSu;
+    Hora rRelojSu;
     //Convertir las horas en puros minutos.
-    iRelojAy1 = (hora * 60) + minu + m;
+    iRelojAy1 = (hh * 60) + mm + m;
     iHrAy1 = iRelojAy1 / 60;
     iMnAy1 = iRelojAy1 % 60;
     
@@ -108,34 +108,27 @@ bool Hora::operator<=(Hora h2)//Checa que la hora sea menor o igual a la recivid
     else 
         return false;
 }
-istream& operator>>(istream &r, Hora &h2)//Mayor Mayor de hora. (>>)
+istream& operator>>(istream &is, Hora &h2)//Mayor Mayor de hora. (>>)
 {
-    r >> h2.getHora();
-    r >> h2.getMinu();
-
-    return r;
+    is >> h2.hh;
+    is >> h2.mm;
+    return is;
 }
-bool Hora::operator<<(hora h2)//Menor, Menor de hora. (<<)
+
+ostream& operator<<(ostream &os, Hora &h2)//Menor, Menor de hora. (<<)
 {
-    if (h2.getHora() <= 9)//Cuando la hora sea < 10 poner un 0 antes.
-    {
-        r << "0" << h2.getHora();
-    }
+    int h = h2.hh, m = h2.mm;
+
+    if (h < 10)//Cuando la hora sea < 10 poner un 0 antes.
+        os << "0" << h;
     else
-    {
-        r << h2.getHora();
-    }
+        os << h;
 
-    r << ":";
+    os << ":";
 
-    if (h2.getMinu() <= 9)//Cuando los minutos sean < 10 poner un 0 antes.
-    {
-        r << "0" << h2.getMinu();
-    }
+    if (m < 10)//Cuando los minutos sean < 10 poner un 0 antes.
+        os << "0" << m;
     else
-    {
-        r << h2.getMinu();
-    }
-
-    return r;
+        os << m;
+    return os;
 }

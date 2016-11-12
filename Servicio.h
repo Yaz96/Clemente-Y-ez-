@@ -1,17 +1,18 @@
+#pragma once //Para que el archivo solo sea incluido una vez cuando se compila.
 class Servicio
 {
 public:
 	//Defaults
 	Servicio();
-	Servicio(String cl, int tM, char t);
+	Servicio(string cl, int tM, char t);
 	//Gets
 	string getClave();//Clave
 	int getTiempoMax();//Tiempo MMaximo
 	char getTipo();//Tipo
 	//Sets
 	void setClave(string cl);//Clave
-	void setTiempoMax();//Tiempo Maximo
-	void setTipo();//Tipo
+	void setTiempoMax(int tM);//Tiempo Maximo
+	void setTipo(char t);//Tipo
 	//Print
 	virtual void muestra() = 0;
 	//Calculo
@@ -26,7 +27,7 @@ Servicio::Servicio()
 {
 	clave = "Default";
 	tiempoMax = 0;
-	char = "D";
+	tipo = 'D';
 }
 Servicio::Servicio(string cl, int tM, char t)
 {
@@ -37,7 +38,7 @@ Servicio::Servicio(string cl, int tM, char t)
 //-----------------------------------------------------------------------------------Gets----------------------------------------------------------------------------
 string Servicio::getClave()
 {
-	return Clave;
+	return clave;
 }	
 int Servicio::getTiempoMax()
 {

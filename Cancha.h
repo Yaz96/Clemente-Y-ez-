@@ -1,4 +1,4 @@
-#include <iostream>
+#include "Servicio.h"
 class Cancha:public Servicio
 {
 public:
@@ -15,7 +15,7 @@ public:
 	void setDeporte(string d);//Deporte
 	//print 
 	void muestra();
-	double calculaCosto(); //Calcular costo
+	double calculaCosto(int Tm); //Calcular costo
 private:
 	double costoXHr;
 	int cantMaxPers;
@@ -26,7 +26,7 @@ Cancha::Cancha() : Servicio()
 {
 	costoXHr = 0.0;
 	cantMaxPers = 0;
-	deportes = "Default basquet";
+	deporte = "(Default)basquet";
 }
 Cancha::Cancha(string cl, int tM, char t, double cos, int cant, string d) : Servicio(cl, tM, t)
 {

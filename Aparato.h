@@ -1,26 +1,27 @@
+#pragma once //Para que el archivo solo sea incluido una vez cuando se compila.
+#include "Servicio.h"
 class Aparato:public Servicio{
 private:
-double costoX15min;
-bool conInstructor;
-string descricpion; 
+    double costoX15min;
+    bool conInstructor;
+    string descripcion; 
+
 public:
+    Aparato();
+    Aparato(string cl, int tM, char t, double cost,bool conInst, string des);
 
-Aparato();
-Aparato(double cost,bool conInst, string des);
+    //Metodos de acceso
+    double getcostoX15min();
+    bool getConInstructor();
+    string getDescripcion();
+    //Metodos de modificacion
+    void setcostoX15min(double Cost);
+    void setConInstructor(bool Cond);
+    void setDescripcion(string Desc);
 
-//Metodos de acceso
-double getcostoX15min();
-bool getConInstructor();
-string getDescripcion();
-
-//Metodos de modificacion
-void setcostoX15min(double Cost);
-void setConInstructor(bool Cond);
-void setDescripcion(string Desc);
-
-// Metodos Abstractos 
-void muestra();
-double calculaCosto (int tiem);
+    // Metodos Abstractos 
+    void muestra();
+    double calculaCosto (int tiem);
 };
 //-----------------------------------------Default---------------------------------------------------
 
@@ -28,7 +29,7 @@ Aparato::Aparato(): Servicio()
 {
     costoX15min=0.0;
     conInstructor=false;
-    descripcion="Sin descripcion";
+    descripcion="Sin_descripcion";
 
 }
 
@@ -36,13 +37,11 @@ Aparato::Aparato( string cl, int tM, char t, double cost,bool conInst, string de
 {
  costoX15min=cost;
  conInstructor =conInst;
- descricpion =des;
-
+ descripcion =des;
 }
 //-------------------------------------------------Acceso--------
 double Aparato::getcostoX15min(){
 return costoX15min;
-
 }
 
 bool Aparato::getConInstructor(){
@@ -50,7 +49,7 @@ return conInstructor;
 }
 
 string Aparato::getDescripcion(){
-return descricpion;
+return descripcion;
 }
 
 //---------------------------------------------------Modificacion------
@@ -62,8 +61,7 @@ void Aparato::setConInstructor(bool Cond){
 conInstructor=Cond;
 }
 void Aparato::setDescripcion(string Desc){
-descricpion=Desc;
-
+descripcion=Desc;
 }
 
 //----------------------------------------------------Metodos Abstractos----
@@ -71,8 +69,7 @@ descricpion=Desc;
 void Aparato::muestra(){
 cout<<"Tipo de Reservacion: Aparato"<<'\n'<<"Clave: "<<clave<<'\n'<< "Tiempo Maximo: " << tiempoMax << '\n'
 	<< "Tipo: " << tipo << '\n' << "Costo por Hora: " << costoX15min<< '\n'<<"Instructor: "<<conInstructor
-    <<'\n'<<"Descripcion: "<<descricpion<<endl;
-
+    <<'\n'<<"Descripcion: "<<descripcion<<endl;
 }
 
 double Aparato::calculaCosto (int tiem){

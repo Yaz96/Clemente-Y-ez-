@@ -1,4 +1,4 @@
-#nclude "Hora.h"
+#include "Hora.h"
 class Reserva{
 private:
 string claveServicio;
@@ -17,7 +17,7 @@ Hora horaInicio;
 //metodos de modificacion
  void setcveServicio(string CveS);
  void setidCliente(int ID);
- void setDuracion(int Durac;
+ void setDuracion(int Durac);
  void setHoraIni(Hora hhini);
 
 // metodo para calcular la hora fin de la reservacion
@@ -39,7 +39,7 @@ Reserva::Reserva(){
 
 Reserva::Reserva(string cveServ, int idCli, int durac, Hora horaInicio){
     claveServicio=cveServ;
-    idClente=idCli;
+    idCliente=idCli;
     duracion=durac;
     horaInicio.setHora(horaInicio.getHora());
     horaInicio.setMinu(horaInicio.getMinu());
@@ -54,7 +54,7 @@ return claveServicio;
  }
 
  int Reserva::getidCliente(){
-return idClente;
+return idCliente;
 
  }
  int Reserva::getDuracion(){
@@ -67,16 +67,13 @@ return horaInicio;
 
  void Reserva::setcveServicio(string CveS){
 claveServicio=CveS;
-
  }
 
  void Reserva::setidCliente(int ID){
-
-idClente=ID;
+idCliente=ID;
  }
  void Reserva::setDuracion(int Durac){
-duracion=Durac
-
+duracion=Durac;
  }
 
  void Reserva::setHoraIni(Hora hhini){
@@ -88,9 +85,9 @@ horaInicio= hhini;
 
 
 Hora Reserva::calculaHorafinReseracion(){
-int numdHoras= duracion/60, numdMinu= numdHoras*60-duracion; //tomando en cuenta que el valor de duracion esta en minutos
+int numdHoras= (duracion/60), numdMinu= (numdHoras*60-duracion); //tomando en cuenta que el valor de duracion esta en minutos
                                                             // esta linea determina el numero de horas y el numero minutos
-int hora=horaInicio.getHora()+numHoras, Minutos= horaInicio.getMinu()+numdMinus;// esta linea determina la hora y los min que se desplegaran
+int hora=(horaInicio.getHora()+numdHoras), Minutos= (horaInicio.getMinu()+numdMinu);// esta linea determina la hora y los min que se desplegaran
 
 if (hora>=24){
     hora=hora-24;
