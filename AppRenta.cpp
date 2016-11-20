@@ -5,9 +5,15 @@
 using namespace std;
 
 #include "Reserva.h"
+<<<<<<< Updated upstream
+=======
+#include "Cancha.h"
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 #include "Aparato.h"
 #include "Cancha.h"
 
+<<<<<<< Updated upstream
 //Declaracion de arrgelos principales.
 Servicio *ASrv[20];
 Reserva Res[50];
@@ -24,12 +30,41 @@ bool I;
     //Aqui escribe tu codigo(Borrar comentario)
 
 //--------------------------------------Consulta reservaciones de una hora especifica.------------------------
-    
-    //Aqui escribe tu codigo(Borrar comentario)
+    void ConsReservHoraSp(){
+        
+
+
+
+    }
+   
 
 //-----------------------------------------Consultar las reservaciones por servicio.------------------------------
+void ConsReservServDado(){
+        I=false;
+    cout<<"Cual es el ID del servicio que deseas buscar: ";
+    cin>>D;
 
-    //Aqui escribe tu codigo(Borrar comentario)
+    for(int iA=0;iA<20; iA++){ 
+    if(ASrvc[iA]->getClave()==D){ //Este if con el for compara la clave que dio el usuario con las claves almacenadas para averiguar el servicio
+    TM=iA;
+    I=true; 
+        }
+    }
+
+    if(I){ //este if compara el validador que usé (I) y si es true quiere decir que sí encontro el servicio y desplegara su informacion sino desplegara que no se encontro y se sale de la funcion
+        ASrvc[TM]->muestra();
+    }
+    else {
+        cout<<"No se encontro el servicio"; 
+        return
+         }
+    for(int iA=0; iA<6; iA++){
+        if(Res[iA].getClave()== D ){
+cout<<"Hora de inicio "<<Res[iA].getHoraIni()<<'\n'<< "Hora de finalizado: "<< Res[iA].calculaHorafinReseracion();
+        }
+    }
+
+    }
 
 //-------------------------------------------Consultar lista de reservaciones----------------------------------------
 void ConLiRes()//Opcion 2
@@ -143,7 +178,7 @@ void vCargaArchivoSe()
 
     iArc.close();
 }
-
+//------------------------------------------------ Main ----------------------------------------//
 int main()
 {   
     int iR;
@@ -165,9 +200,11 @@ int main()
                 ConLiRes();
                 break;
             case 3://Consultar las reservaciones por servicio.
+            ConsReservServDado();
                 //Llama la funciones como quieras.(Borrar comentario)
                 break;
             case 4://Consulta reservaciones de una hora especifica.
+            ConsReservHoraSp()
                 //Llama la funciones como quieras.(Borrar comentario)
                 break;
             case 5://Hacer una reservacion.
@@ -179,5 +216,5 @@ int main()
 
     //Terminado el programa, se libera la memoria.
     delete [] &ASrv;
-    return 0;
+
 }
