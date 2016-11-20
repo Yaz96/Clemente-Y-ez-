@@ -37,32 +37,37 @@ void ConLiRes()//Opcion 2
     iCont = 0;
    do
    {
+       //Imprimi los datos desados para la reserva.
         cout << "Clave de servicio: " << Res[iCont].getcveServicio() << '\n' << "Clave del cliente: " <<
         Res[iCont].getidCliente() << '\n' << "Hora de incio: " << Res[iCont].getHoraIni() << '\n' << "Hora final: " <<
         Res[iCont].getHoraIni() + Res[iCont].getDuracion() << '\n' << "Costo: "; 
 
-        for (int i = 0; i < 20;  i++)
+        for (int i = 0; i < 20; i++)//Recorre todo el arreglo de servicio.
         {
+            //Compara la clave de servicio del archivo de reserva.txt con el de servicios.txt guardados en los arreglos
+            //para ver si es cancha o si es aparato.
             if (Res[iCont].getcveServicio() == ASrv[i] -> getClave())
             {
+                //llama la funcion de calcula costo respectiva..
                 cout << ASrv[i] -> calculaCosto(Res[iCont].getDuracion());
-                break;
+                break;//Termina el ciclo de for para que no haga cilos de mas.
             }
         }
-
+        //Solo para que se vea ordenado.
         cout << '\n' << endl;
 
-        iCont++;
+        iCont++;//Para cambiar de resercaiones y se repita el proceso.
 
     }while (Res[iCont].getidCliente() != 0);//Esto es para que no imprima todas las reservaciones vacias.
 }
 //-----------------------------------------------Consultar lista de servicio-----------------------------------
 void ConDeLiServ()//Opcion 1
 {
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 20; i++)//Recorre todo el archivo de servicio.
     {
-        ASrv[i] -> muestra();
-        cout << endl;
+        ASrv[i] -> muestra(); //El arreglo de apuntadores llama la funcion muestra respectiva
+                              //segun sea cancha o reserva.
+        cout << endl;//Para que se vea ordenado
     }
 }
 //------------------------------------------------------Menu----------------------------------------------------
