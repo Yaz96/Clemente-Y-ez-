@@ -1,4 +1,4 @@
-#pragma once //Para que el archivo solo sea incluido una vez cuando se compila.
+#pragma once //Para que la clase solo sea incluido una vez cuando se compila.
 #include "Servicio.h"
 class Aparato:public Servicio{
 private:
@@ -68,7 +68,7 @@ descripcion=Desc;
 
 void Aparato::muestra(){
 cout<<"Tipo de Reservacion: Aparato"<<'\n'<<"Clave: "<<clave<<'\n'<< "Tiempo Maximo: " << tiempoMax << '\n'
-	<< "Tipo: " << tipo << '\n' << "Costo por Hora: " << costoX15min<< '\n'<<"Instructor: "<<conInstructor
+	<< "Tipo: " << tipo << '\n' << "Costo X 15min: " << costoX15min<< '\n'<<"Instructor: "<<conInstructor
     <<'\n'<<"Descripcion: "<<descripcion<<endl;
 }
 

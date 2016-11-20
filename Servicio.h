@@ -16,7 +16,7 @@ public:
 	//Print
 	virtual void muestra() = 0;
 	//Calculo
-	virtual double calculaCosto(int in, int tM) = 0; //Calcula el costo
+	virtual double calculaCosto(int tM) = 0; //Calcula el costo
 protected:
 	string clave;
 	int tiempoMax;

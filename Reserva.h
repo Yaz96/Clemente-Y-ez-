@@ -41,10 +41,8 @@ Reserva::Reserva(string cveServ, int idCli, int durac, Hora horaInicio){
     claveServicio=cveServ;
     idCliente=idCli;
     duracion=durac;
-    horaInicio.setHora(horaInicio.getHora());
-    horaInicio.setMinu(horaInicio.getMinu());
+    this->horaInicio = horaInicio;//Usando sobrecarga de = de la clase Hora.
 }
-
 
 //---------------------------------------------Gets----------------------------------------------------
 

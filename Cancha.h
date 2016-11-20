@@ -1,3 +1,4 @@
+#pragma once //Para que la clase solo sea incluido una vez cuando se compila.
 #include "Servicio.h"
 class Cancha:public Servicio
 {

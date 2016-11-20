@@ -14,6 +14,7 @@ public:
     void print();
     //Sobrecargas
     Hora operator+(int m);//Sumarle minutos a una hora.
+    void operator=(Hora h2);//Para igualar una hora a otra.
     bool operator==(Hora h2);//Comaparar dos horas.
     bool operator>=(Hora h2);//Mayor igual que, entre horas.
     bool operator<=(Hora h2);//Menor igual que, entre horas.
@@ -86,6 +87,11 @@ Hora Hora::operator+(int m)//Suma con minutos del usuario. (+)
     }
     rRelojSu.setMinu(iMnAy1);
     return rRelojSu;//Regresa una hora.
+}
+void Hora::operator=(Hora h2)//Pasar los datos de una a otro.
+{
+    hh = h2.getHora();
+    mm = h2.getMinu();
 }
 bool Hora::operator==(Hora h2)//Compara que dos horas sean iguales. (==)
 {
