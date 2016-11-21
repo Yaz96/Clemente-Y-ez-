@@ -19,6 +19,8 @@ Servicio *ASrv[20];
 Reserva Res[50];
 //Varibales de apoyo.
 ifstream iArc;
+ofstream archReservas;
+Reserva NuevaRes;
 string S, D;
 int TM, C, M, H, iCont;
 double Co;
@@ -27,39 +29,85 @@ bool I;
 
 //--------------------------------------------Hacer una reservacion-----------------------------------------------
 void HacerReserv(){
-//_______Validacion de los datos__
+   Hora horaFin, horaIn; //Esta variable se utiliza en la validacion de la hora 
+    string validacion2; //Esta variable se utiliza en la validacion de los minutos disponibles 
+//________________Validacion de los datos_____
     cout<<"iD del cliente: ";
     cin>>D;
+    cout<<endl;
 
     I=false;
-
-    do{       // Validacion de la clave de servicio 
+// Validacion de la clave de servicio ___________
+    do{        
     cout<<"Clave del servicio ";
     cin>>S;
+    cout<<endl;
     for(int iA=0; iA<20; iA++){
         if(ASrv[iA]->getClave==S){
+            iA=C;
             I=true;
         }
     }
     }while(!I);
+    I=false;
 
-    do{ //Validacion de los minutos disponibles
+//Validacion de los minutos disponibles_________
+    do{ 
     cout<<"Minutos a reservar ";
     cin>>TM;
-    }while( );
+    if(ASrv[C]->getTiempoMax()<=TM)
+        I=true;
+    else{
+    cout<<"Este tiempo sobrepasa el maximo de tiempo permitido, ¿Quieres reservar el servicio menos tiempo? ";
+    cin>>validacion2;
+    cout<<endl;
+    if (validacion2!=si)
+    return
+}
+    }while(!I);
 
+//Validacion de la hora en la que se quiere reservar____
 
-do{ //Validacion de la hora en la que se quiere reservar
+do{ 
+    I=true;
     cout<<"Hora de la reservacion ";
     cin>>H>>M;
-
+    horaIn.setHora(H);
+    horaIn.setMinu(M);
+    horaFin=horaIn+TM;
+    
+    for(int iA=0;iA<30;iA++){
+        if(!(Res[iA].getHoraIni()>horaFin||Res[iA].calculaHorafinReseracion()<horaIn))
+      {  I=false;
+        cout<<"Esta hora ya esta ocupada";
+        return;}
+    }
+} while( !I );
  
 
+//Despliegue del costo del servicio 
+
+ for(int iA=0; iA<20 ; iA++){
+     if(ASrv[iA]->getClave==S){
+     cout<<"Costo del servicio "<< ASrv[iA].calculaCosto(TM)
+     }
+ }
+
 //_______Escritura de la reservacion_____ 
+archReservas.open("Reserva.txt");
 
-
-
-
+archReservas<<S<<" "<< H<<" "<<M<<" "<<TM<<" "<<D<<endl;
+archReservas.close();
+NuevaRes().setcveServicio(S);
+ NuevaRes().setidCliente(D;
+ NuevaRes().setDuracion(TM);
+ NuevaRes().setHoraIni(horaIn);
+for(int iA=0; iA<50;iA++){
+    if(Res[iA].idCliente==0){
+        Res[iA]=NuevaRes;
+        return;
+    }
+}
 }
 
 
@@ -70,7 +118,7 @@ do{ //Validacion de la hora en la que se quiere reservar
         cin>>H>>M;
         Hora horaSuj(H,M);
 
-        for(int iA=0; iA<6; iA++){ 
+        for(int iA=0; iA<30; iA++){ 
         if(Res[iA].getHoraIni== horaSuj){ //En este par de for y if con iA se comparan las horas de las reservaciones para obtener cual tiene la misma hora
             for(int iB=0, iB<20;iB++){ //una vez que encontremos una reservacion con esa hora buscaremos que servicio tiene la misma clave que esa reservacion para despues imprimir la info
                 if(ASrv[iB]->getClave()==Res[iA].getClave())
@@ -101,7 +149,7 @@ void ConsReservServDado(){
         cout<<"No se encontro el servicio"; 
         return
          }
-    for(int iA=0; iA<6; iA++){
+    for(int iA=0; iA<30; iA++){
         if(Res[iA].getClave()== D ){
 cout<<"Hora de inicio "<<Res[iA].getHoraIni()<<'\n'<< "Hora de finalizado: "<< Res[iA].calculaHorafinReseracion();
         }
@@ -247,11 +295,12 @@ int main()
                 //Llama la funciones como quieras.(Borrar comentario)
                 break;
             case 4://Consulta reservaciones de una hora especifica.
-            ConsReservHoraSp()
+            ConsReservHoraSp();
                 //Llama la funciones como quieras.(Borrar comentario)
                 break;
             case 5://Hacer una reservacion.
-                //Llama la funciones como quieras.(Borrar comentario)
+                HacerReserv();
+
                 break;
         };
 
