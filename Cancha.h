@@ -74,7 +74,7 @@ double Cancha::calculaCosto(int Tm)//Por hora.
 	int iCN;
 	iCN = Tm / 60;
 
-	if ((Tm % 6) != 0) //Si sobran minutos, se combra una hora mas.
+	if ((Tm % 60) != 0) //Si sobran minutos, se combra una hora mas.
 		iCN ++;
 
 	return costoXHr * iCN;

@@ -120,7 +120,6 @@ istream& operator>>(istream &is, Hora &h2)//Mayor Mayor de hora. (>>)
     is >> h2.mm;
     return is;
 }
-
 ostream& operator<<(ostream &os, Hora &h2)//Menor, Menor de hora. (<<)
 {
     int h = h2.hh, m = h2.mm;

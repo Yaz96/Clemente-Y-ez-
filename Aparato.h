@@ -73,7 +73,10 @@ cout<<"Tipo de Reservacion: Aparato"<<'\n'<<"Clave: "<<clave<<'\n'<< "Tiempo Max
 }
 
 double Aparato::calculaCosto (int tiem){
-    int sesiones= ceil(tiem/15);
+    int sesiones= (tiem/15);
+    if ((tiem%15) != 0)//Para que le cuente 15 minutos aunque no los cumpla.
+        sesiones++;
+
 double Precio=sesiones*costoX15min;
 return Precio;
 }

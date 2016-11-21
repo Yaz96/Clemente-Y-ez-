@@ -1,10 +1,11 @@
 #include "Hora.h"
 class Reserva{
 private:
-string claveServicio;
-int idCliente, duracion;
-Hora horaInicio;
- public:
+ string claveServicio;
+ int idCliente, duracion;
+ Hora horaInicio;
+
+public:
  Reserva();
  Reserva(string cveServ, int idCli, int durac, Hora horaInicio);
 
@@ -20,9 +21,8 @@ Hora horaInicio;
  void setDuracion(int Durac);
  void setHoraIni(Hora hhini);
 
-// metodo para calcular la hora fin de la reservacion
-Hora calculaHorafinReseracion(); 
-
+ // metodo para calcular la hora fin de la reservacion
+ Hora calculaHorafinReservacion(); 
 };  
 
 
@@ -34,7 +34,6 @@ Reserva::Reserva(){
     duracion= 0;
     horaInicio.setHora(0);
     horaInicio.setMinu(0);
-
 }
 
 Reserva::Reserva(string cveServ, int idCli, int durac, Hora horaInicio){
@@ -48,12 +47,9 @@ Reserva::Reserva(string cveServ, int idCli, int durac, Hora horaInicio){
 
  string Reserva::getcveServicio(){
 return claveServicio;
-
  }
-
  int Reserva::getidCliente(){
 return idCliente;
-
  }
  int Reserva::getDuracion(){
 return duracion;
@@ -75,23 +71,15 @@ duracion=Durac;
  }
 
  void Reserva::setHoraIni(Hora hhini){
-
 horaInicio= hhini;
  }
  
  //----------------------------------------------Hora Final-------------------------------------------------------
 
 
-Hora Reserva::calculaHorafinReseracion(){
-int numdHoras= (duracion/60), numdMinu= (numdHoras*60-duracion); //tomando en cuenta que el valor de duracion esta en minutos
-                                                            // esta linea determina el numero de horas y el numero minutos
-int hora=(horaInicio.getHora()+numdHoras), Minutos= (horaInicio.getMinu()+numdMinu);// esta linea determina la hora y los min que se desplegaran
+Hora Reserva::calculaHorafinReservacion(){
+Hora HoraFin = horaInicio + duracion;//Usando el sobrecarga de operador, se suma a la hora de inicio la duracion.
 
-if (hora>=24){
-    hora=hora-24;
-}
-
-Hora HoraFin(hora,Minutos);
 return HoraFin;
 }
 
