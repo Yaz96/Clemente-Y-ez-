@@ -26,15 +26,58 @@ char TS, CI;
 bool I;
 
 //--------------------------------------------Hacer una reservacion-----------------------------------------------
+void HacerReserv(){
+//_______Validacion de los datos__
+    cout<<"iD del cliente: ";
+    cin>>D;
 
-    //Aqui escribe tu codigo(Borrar comentario)
+    I=false;
+
+    do{       // Validacion de la clave de servicio 
+    cout<<"Clave del servicio ";
+    cin>>S;
+    for(int iA=0; iA<20; iA++){
+        if(ASrv[iA]->getClave==S){
+            I=true;
+        }
+    }
+    }while(!I);
+
+    do{ //Validacion de los minutos disponibles
+    cout<<"Minutos a reservar ";
+    cin>>TM;
+    }while( );
+
+
+do{ //Validacion de la hora en la que se quiere reservar
+    cout<<"Hora de la reservacion ";
+    cin>>H>>M;
+
+ 
+
+//_______Escritura de la reservacion_____ 
+
+
+
+
+}
+
+
 
 //--------------------------------------Consulta reservaciones de una hora especifica.------------------------
     void ConsReservHoraSp(){
-        
+        cout<<"Ingresa la hora con minutos separados por un espacio que deseas buscar ";
+        cin>>H>>M;
+        Hora horaSuj(H,M);
 
-
-
+        for(int iA=0; iA<6; iA++){ 
+        if(Res[iA].getHoraIni== horaSuj){ //En este par de for y if con iA se comparan las horas de las reservaciones para obtener cual tiene la misma hora
+            for(int iB=0, iB<20;iB++){ //una vez que encontremos una reservacion con esa hora buscaremos que servicio tiene la misma clave que esa reservacion para despues imprimir la info
+                if(ASrv[iB]->getClave()==Res[iA].getClave())
+                ASrv[iB]->muestra();
+            }
+        }
+        }
     }
    
 
