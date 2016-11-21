@@ -11,9 +11,10 @@ using namespace std;
 //Declaracion de arrgelos principales.
 Servicio *ASrv[20];
 Reserva Res[50];
-//Varibales de apoyo.
+//Variable para leer y sobreescribir los datos
 ifstream iArc;
-ofstream oArc;
+ofstream archReservas;
+//Varibales de apoyo.
 string S, D;
 int TM, C, M, H, iCont, iCont2;
 double Co;
@@ -22,8 +23,20 @@ bool I, help;
 Hora Ho;
 Reserva NuevaRrv;
 
+void Terminar()
+{
+    //_______Escritura de la reservacion_____ 
+    archReservas.open("Reserva.txt");
+    
+    for (int i = 0; i <iCont2; i++)
+    {
+        Ho = Res[i].getHoraIni();
+        archReservas << Res[i].getcveServicio() <<" "<< Ho.getHora() <<" "<< Ho.getMinu() <<" "<< Res[i].getDuracion() <<" "<< Res[i].getidCliente() <<endl;
+    }
+    archReservas.close();
+}
 //--------------------------------------------Hacer una reservacion-----------------------------------------------
-void HacerRes()
+void HacerRes()//Opcion 5
 {
     I = false;//Ayuda.
     iCont = 0;//Ayuda.
@@ -96,8 +109,7 @@ void HacerRes()
             help = false;//si la hora no es valida pone false.
             cout << "Hora incorrecta, intentelo de nuevo" << endl;//Mensaje de error.
         }
-    }
-    while(help == false);//Hara el ciclo hasta qu escriba una hora valida.
+    }while(help == false);//Hara el ciclo hasta qu escriba una hora valida.
 
     help = true;//Ayuda en true.
     //Recorremos el arreglo de reserva hasta iCont2
@@ -106,7 +118,7 @@ void HacerRes()
     {
         if (S == Res[i].getcveServicio())//Para verificar si el servico ya esta reservado o no.
         {
-            //Checa si la hora incio escrita por el usario esta en el rango de las horas de la resrvacion
+            //Checa si la hora incio escrita por el usario esta en el rango de las horas de la reservaciones
             if (Ho >= Res[i].getHoraIni() && Ho <= Res[i].calculaHorafinReservacion()) 
                 help = false;//Si se empalman las horas cambia la help a false
 
@@ -116,15 +128,12 @@ void HacerRes()
                 help = false;//Si se empalman las horas cambia la help a false
         }
     }
-
-    if (help == true)//Si no se empalman las horas.
+    if (help)//Si no se empalman las horas.
     {
         NuevaRrv.setHoraIni(Ho);//Guardamos la hora de incio en el arreglo de ayuda.
         cout << "Se realizo la reserva con exito" << endl;
         //En iCont2 guardamos una posicion despues de la ultima poscion ocupada en el arreglo.
         Res[iCont2] = NuevaRrv;//Guardamos la reservacion en el arreglo.
-
-        //Llamar funcion para sobreescribir los datos en el archivo.
     }
     else
     {
@@ -133,6 +142,7 @@ void HacerRes()
         cout << endl;
         return;
     }
+
     //------------------------------------Desplegar costo-----------------------------------------
     //Usamos el arreglo de servicio con la posicion del servicio gurdada en iCont anteriormente
     //y llamamos la funcion de calcular costo con la variable M donde se guardo la respuesta del usuario
@@ -143,13 +153,59 @@ void HacerRes()
     iCont2++;//Por si el usuario quiere hacer otra reservacion, le dejamos la posicion lista.
 }
 //--------------------------------------Consulta reservaciones de una hora especifica.------------------------
-    
-    //Aqui escribe tu codigo(Borrar comentario)
+void ConsReservHoraSp(){//Opcion 4
+    cout << "Ingresa la hora que desea checar:" << endl;
+    cin>>Ho;//Usando la sobreecarga de operadores.
 
+    cout << "Se desplegara todos los servicios en uso durante esas horas" << endl;
+    cout << endl;
+
+    for(int iA=0; iA<iCont2; iA++){ //En iCont2 se guardo la posicion siguiente de la ultima posicon ocupada en el arreglo de reserva.
+        if(Ho >= Res[iA].getHoraIni() && Ho <= Res[iA].calculaHorafinReservacion()){ //En este par de for y if con iA se comparan las horas de las reservaciones para
+                                                                                     //cuales estan en uso durante ese tiempo.
+            for(int iB=0;iB<20;iB++){ //una vez que encontremos una reservacion con esa hora buscaremos 
+                                      //que servicio tiene la misma clave que esa reservacion para despues imprimir la info
+                if(ASrv[iB]->getClave()==Res[iA].getcveServicio()){
+                    ASrv[iB]->muestra();
+                    cout << endl;
+                }
+            }
+        }
+    }
+}
 //-----------------------------------------Consultar las reservaciones por servicio.------------------------------
+void ConsReservServDado(){//Opcion 3
+    I=false;
 
-    //Aqui escribe tu codigo(Borrar comentario)
+    cout<<"Cual es el ID del servicio que deseas buscar: ";
+    cin>>D;
 
+    for(int iA=0;iA<20; iA++){ 
+        if(ASrv[iA]->getClave()==D){//Este if con el for compara la clave que dio el usuario 
+                                    //con las claves almacenadas para averiguar el servicio
+            TM=iA;
+            I=true; 
+        }
+    }
+    //este if compara el validador que usé (I) y si es true quiere decir que sí encontro el servicio 
+    //y desplegara su informacion sino desplegara que no se encontro y se sale de la funcion
+    if(I){ 
+        ASrv[TM]->muestra();
+    }
+    else {
+        cout<<"No se encontro el servicio" << endl;
+        cout << endl;
+    }
+    cout << endl;
+    cout << "Horas reservadas:" << endl;
+    for(int iA=0; iA<iCont2; iA++){//Ciclo que recorre el arreglo de reserva hasta iCont2 donde se guarda un lugar despues del ultimo ocupado.
+        if(Res[iA].getcveServicio()== D){//Compara el servicio del arreglo con el escrito por el usuario.
+            cout<<"Hora de inicio: "<<Res[iA].getHoraIni()<<'\n'
+            << "Hora de finalizado: "<< Res[iA].calculaHorafinReservacion() << endl;
+            cout << endl;
+        }
+    }
+}
 //-------------------------------------------Consultar lista de reservaciones----------------------------------------
 void ConLiRes()//Opcion 2
 {
@@ -196,9 +252,9 @@ int Menu()
     //Opciones del menu.
     cout << "Esocge el numero opcion que desees"<< endl;
     cout << "1. Consultar la lista de Servicio" << '\n' <<
-    "2. Consultar la lista de reserva" << '\n' << 
-    "3. Consultar las reservaciones de un servicio dado" << '\n'
-    << "4. Consultar las reservaciones de una hora especificada" <<
+    "2. Consultar la lista de reservaciones" << '\n' << 
+    "3. Consultar las reservaciones por clave de servicio" << '\n'
+    << "4. Consultar las reservaciones de una hora en especifico" <<
     '\n' << "5. Hacer una reservacion." << '\n' << "0. Terminar" << endl;
     cin >> iRes;
     
@@ -264,7 +320,7 @@ void vCargaArchivoSe()
 
     iArc.close();
 }
-
+//------------------------------------------------ Main ----------------------------------------//
 int main()
 {   
     int iR;
@@ -286,13 +342,18 @@ int main()
                 ConLiRes();
                 break;
             case 3://Consultar las reservaciones por servicio.
-                //Llama la funciones como quieras.(Borrar comentario)
+                ConsReservServDado();
                 break;
             case 4://Consulta reservaciones de una hora especifica.
-                //Llama la funciones como quieras.(Borrar comentario)
+                ConsReservHoraSp();
                 break;
             case 5://Hacer una reservacion.
                 HacerRes();
+                break;
+            case 0:
+                Terminar();
+                break;
+            default: cout << "Numero incorrecto"<< endl;
                 break;
         };
 
@@ -300,5 +361,5 @@ int main()
 
     //Terminado el programa, se libera la memoria.
     delete [] &ASrv;
-    return 0;
+
 }
